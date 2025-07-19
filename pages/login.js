@@ -19,7 +19,7 @@ export default function Login() {
 
     return (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h2>Login</h2>
+            <h2>🔐 Login to Your Account</h2>
             <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <br />
             <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -27,4 +27,4 @@ export default function Login() {
             <button onClick={handleLogin}>Login</button>
         </div>
     );
-}
+    }
