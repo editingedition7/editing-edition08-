@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Link from 'next/link';
 
 export default function Order() {
     const [form, setForm] = useState({
@@ -36,14 +37,14 @@ export default function Order() {
     };
 
     return (
-        <div style={{ backgroundColor: '#0f172a', minHeight: '100vh', color: 'white', padding: '40px' }}>
+        <div style={{ backgroundColor: '#0f172a', minHeight: '100vh', color: 'white', padding: '40px', paddingBottom: '80px' }}>
             <h1 style={{ textAlign: 'center', color: '#38bdf8' }}>📩 Place Your Order</h1>
             <p style={{ textAlign: 'center', marginBottom: '20px' }}>🚀 Trusted By 200+ Clients | Fast Delivery for Premium Users</p>
             <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto' }}>
                 <input placeholder="Name" name="name" value={form.name} onChange={handleChange} required style={inputStyle} />
                 <input placeholder="Email" name="email" type="email" value={form.email} onChange={handleChange} required style={inputStyle} />
                 <input placeholder="Phone (Optional)" name="phone" value={form.phone} onChange={handleChange} style={inputStyle} />
-                
+
                 <select name="type" value={form.type} onChange={handleChange} required style={inputStyle}>
                     <option value="">Select Project Type</option>
                     <option>Short Reels / Gaming Shorts</option>
@@ -85,6 +86,8 @@ export default function Order() {
             </form>
 
             <p style={{ textAlign: 'center', marginTop: '20px', color: '#38bdf8' }}>🔥 Your Idea • Our Edit • Your Viral Moment!</p>
+
+            <BottomNav />
         </div>
     );
 }
@@ -109,4 +112,30 @@ const button = {
     borderRadius: '8px',
     cursor: 'pointer',
     marginTop: '20px'
+};
+
+function BottomNav() {
+    return (
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            width: '100%',
+            backgroundColor: '#1e293b',
+            padding: '10px 0',
+            position: 'fixed',
+            bottom: 0
+        }}>
+            <Link href="/"><span style={navItem}>🏠 Home</span></Link>
+            <Link href="/dashboard"><span style={navItem}>📊 Dashboard</span></Link>
+            <Link href="/pricing"><span style={navItem}>💰 Pricing</span></Link>
+            <Link href="/order"><span style={navItem}>📝 Order</span></Link>
+            <Link href="/job"><span style={navItem}>💼 Jobs</span></Link>
+        </div>
+    );
+}
+
+const navItem = {
+    color: '#38bdf8',
+    fontWeight: 'bold',
+    cursor: 'pointer'
 };
