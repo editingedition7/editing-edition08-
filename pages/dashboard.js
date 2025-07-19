@@ -1,55 +1,99 @@
 import { useEffect, useState } from 'react';
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Dashboard() {
-    const [username, setUsername] = useState("");
+    const [user, setUser] = useState(null);
+    const [isPremium, setIsPremium] = useState(false); // For demo purpose
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                setUsername(user.displayName || user.email.split('@')[0]);
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            if (currentUser?.email === "premiumuser@gmail.com") {
+                setIsPremium(true);
             }
         });
+        return () => unsubscribe();
     }, []);
 
     return (
-        <div style={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            height: '100vh', 
-            backgroundColor: '#0f172a', 
-            color: 'white', 
-            flexDirection: 'column' 
-        }}>
-            <h1 style={{ fontSize: '2rem', marginBottom: '10px', color: '#38bdf8' }}>
-                🎉 Welcome, {username} 🚀
-            </h1>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            style={{
+                textAlign: 'center',
+                marginTop: '50px',
+                fontFamily: 'Poppins, sans-serif',
+                background: '#0f0f0f',
+                color: '#fff',
+                padding: '50px',
+                borderRadius: '20px',
+                maxWidth: '600px',
+                margin: '50px auto',
+                boxShadow: '0 0 20px rgba(0,255,255,0.2)'
+            }}
+        >
+            <h1 style={{ fontSize: '2rem', color: '#00ffe0' }}>👑 Welcome, {user?.email || 'User'}</h1>
+            <h2 style={{ marginTop: '10px' }}>
+                Your Status: {isPremium ? '💎 PREMIUM MEMBER' : '❌ FREE USER'}
+            </h2>
+            <h3 style={{ color: isPremium ? 'lime' : '#f44336', marginTop: '5px' }}>
+                Priority: {isPremium ? '✅ Activated | 🚀 Fast Lane Active' : '❌ Normal Queue'}
+            </h3>
 
-            <h2 style={{ marginBottom: '20px' }}>💎 Status: <span style={{ color: 'gold' }}>Free User</span></h2>
-            <h3 style={{ marginBottom: '30px' }}>🔥 Upgrade to Premium for Faster Editing & Priority Service!</h3>
+            {isPremium && (
+                <motion.div
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    style={{ marginTop: '30px' }}
+                >
+                    <h2 style={{ color: '#00ffe0' }}>🔥 Your Premium Benefits:</h2>
+                    <p>🎖️ Premium Verified Editor Certificate</p>
+                    <p>🚀 Fast Delivery • VIP Queue</p>
+                    <p>💼 Trusted by 200+ Creators, Traders & Influencers</p>
+                    <p>👁️ Exclusive Access To Premium Services</p>
+                </motion.div>
+            )}
 
-            <Link href="/pricing">
-                <button style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#38bdf8',
-                    color: '#0f172a',
-                    fontWeight: 'bold',
-                    border: 'none',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    marginBottom: '30px'
-                }}>
-                    Upgrade Now 🚀
-                </button>
-            </Link>
+            {!isPremium && (
+                <motion.div
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.3 }}
+                    style={{ marginTop: '40px' }}
+                >
+                    <h3 style={{ color: '#f44336' }}>
+                        Upgrade to Premium for Faster Delivery & VIP Status!
+                    </h3>
+                    <Link href="/pricing">
+                        <button style={{
+                            padding: '12px 30px',
+                            marginTop: '15px',
+                            background: '#00ffe0',
+                            border: 'none',
+                            color: '#000',
+                            borderRadius: '10px',
+                            fontWeight: 'bold',
+                            cursor: 'pointer',
+                            transition: '0.3s'
+                        }}>Upgrade to Premium 🚀</button>
+                    </Link>
+                </motion.div>
+            )}
 
-            <div style={{ textAlign: 'center' }}>
-                <h4>✅ Active Clients: 200+ | Ongoing Orders: 50+</h4>
-                <p style={{ color: '#94a3b8' }}>Trusted by Creators • Influencers • Traders</p>
-            </div>
-        </div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                style={{ marginTop: '50px', fontSize: '14px', color: '#999' }}
+            >
+                <p>✅ Active Clients: 200+ | Ongoing Orders: 50+</p>
+                <p>Trusted by Influencers • Creators • Traders</p>
+            </motion.div>
+        </motion.div>
     );
-        }
+                     }
