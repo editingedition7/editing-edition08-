@@ -1,18 +1,18 @@
 export default function Contact() {
     return (
-        <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h1>📞 Contact Us - Editing Edition 7</h1>
-
-            <h2 style={{ marginTop: '30px' }}>For Any Queries Or Support:</h2>
-
-            <p>📧 <b>Email:</b> ediitingedition@gmail.com</p>
-            <p>📷 <b>Instagram:</b> @editing___edition07</p>
-            <p>📲 <b>Telegram:</b> @teamtoxic0009</p>
-            <p>📱 <b>WhatsApp (Only For Premium Users):</b> +91 8538989371</p>
-
-            <h2 style={{ marginTop: '50px' }}>⚠️ Important:</h2>
-            <p>Please confirm your payment via UPI Screenshot on Telegram before expecting services.</p>
-            <p>UPI ID for Payment: <b>hariomgupta8538@axl</b></p>
+        <div style={{
+            backgroundColor: '#0f172a',
+            color: 'white',
+            minHeight: '100vh',
+            padding: '50px',
+            textAlign: 'center'
+        }}>
+            <h1 style={{ fontSize: '2rem', color: '#38bdf8' }}>📞 Contact Us</h1>
+            <p>Email: <b>ediitingedition@gmail.com</b></p>
+            <p>Instagram: <b>@editing___edition07</b></p>
+            <p>Telegram: <b>@teamtoxic0009</b></p>
+            <p>WhatsApp (Premium Only): <b>+91 8538989371</b></p>
+            <h3 style={{ marginTop: '50px', color: '#38bdf8' }}>We Support Only Serious Creators 🚀</h3>
         </div>
     );
-}
+    }
