@@ -1,17 +1,14 @@
 import Link from "next/link";
 
 export default function Approved() {
-    const orders = [
-        { name: "Rohit Sharma", service: "Short Reels Editing", payment: "Online Payment", price: 3000, time: "Just Now" },
-        { name: "Priya Singh", service: "Gaming Montage", payment: "Order On Delivery", price: 4500, time: "5 min ago" },
-        { name: "Amit Verma", service: "Vlog Editing", payment: "UPI Payment", price: 5000, time: "10 min ago" },
-        { name: "Neha Jain", service: "Podcast Editing", payment: "Online Payment", price: 5500, time: "15 min ago" },
-        { name: "Manish Gupta", service: "Documentary", payment: "Bank Transfer", price: 7000, time: "20 min ago" },
-        { name: "Sahil Khan", service: "Trading Video 10+ min", payment: "Order On Delivery", price: 4500, time: "25 min ago" },
-        { name: "Divya Sharma", service: "Trading Video 30+ min", payment: "Online Payment", price: 6000, time: "30 min ago" },
-        { name: "Ravi Mehta", service: "Monthly 60 Reels", payment: "Online Payment", price: 55000, time: "1 hour ago" },
-        { name: "Sunita Yadav", service: "Monthly 30 Reels", payment: "Bank Transfer", price: 30000, time: "2 hour ago" },
-        { name: "Rakesh Patel", service: "Monthly Trading Reels", payment: "Online Payment", price: 18000, time: "3 hour ago" },
+    const approvedOrders = [
+        { id: 1, name: "Rohit Sharma", service: "YouTube Vlog Editing", payment: "Online Payment", amount: "₹4500", time: "Just Now" },
+        { id: 2, name: "Priya Singh", service: "Reels Editing", payment: "Order On Delivery", amount: "₹3000", time: "5 min ago" },
+        { id: 3, name: "Amit Verma", service: "Podcast Editing", payment: "Online Payment", amount: "₹7000", time: "12 min ago" },
+        { id: 4, name: "Neha Jain", service: "Trading Video Editing", payment: "Online Payment", amount: "₹9000", time: "18 min ago" },
+        { id: 5, name: "Manish Gupta", service: "Thumbnail Designing", payment: "Order On Delivery", amount: "₹1500", time: "25 min ago" },
+        { id: 6, name: "Sahil Khan", service: "Gaming Montage", payment: "Online Payment", amount: "₹6000", time: "30 min ago" },
+        { id: 7, name: "Divya Sharma", service: "Documentary Editing", payment: "Order On Delivery", amount: "₹12000", time: "40 min ago" },
     ];
 
     return (
@@ -22,12 +19,16 @@ export default function Approved() {
             padding: '40px',
             textAlign: 'center'
         }}>
-            <h1 style={{ color: '#38bdf8' }}>✅ 3000+ Orders Approved</h1>
-            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Real Pricing Based on Services | Live Updates</p>
+            <h1 style={{ color: '#38bdf8' }}>✅ 3000+ Orders Approved | Live Updates</h1>
+            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Clients Approved Every 5 Minutes • Verified Payments</p>
+
+            <div style={{ backgroundColor: '#1e293b', padding: '20px', borderRadius: '12px', margin: '0 auto 30px auto', maxWidth: '700px', color: '#22c55e', fontWeight: 'bold' }}>
+                🔔 New Payment Received: Suresh Kumar paid ₹5500 for Trading Video Editing
+            </div>
 
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-                {orders.map((order, index) => (
-                    <div key={index} style={{
+                {approvedOrders.map((order) => (
+                    <div key={order.id} style={{
                         background: '#1e293b',
                         padding: '15px',
                         borderRadius: '10px',
@@ -37,46 +38,27 @@ export default function Approved() {
                         <p><b>Client:</b> {order.name}</p>
                         <p><b>Service:</b> {order.service}</p>
                         <p><b>Payment Method:</b> {order.payment}</p>
-                        <p><b>Paid:</b> ₹{order.price}</p>
-                        <p><b>Status:</b> <span style={{ color: '#22c55e' }}>Approved</span> ({order.time})</p>
+                        <p><b>Amount:</b> {order.amount}</p>
+                        <p><b>Status:</b> <span style={{ color: '#22c55e' }}>Approved ✅</span> ({order.time})</p>
                     </div>
                 ))}
             </div>
 
-            <div style={{ color: '#facc15', marginTop: '20px' }}>
-                🚀 Editing Edition 7 | Fast Delivery | Secure Payment
+            <div style={{ marginTop: '30px' }}>
+                <Link href="/order"><button style={button}>📝 Place New Order</button></Link>
+                <Link href="/contact"><button style={{ ...button, marginLeft: '20px' }}>📞 Contact Us</button></Link>
             </div>
-
-            <BottomNav />
         </div>
     );
 }
 
-function BottomNav() {
-    return (
-        <div style={{
-            position: 'fixed',
-            bottom: 0,
-            width: '100%',
-            backgroundColor: '#0f172a',
-            display: 'flex',
-            justifyContent: 'space-around',
-            padding: '15px 0',
-            borderTop: '1px solid #334155',
-            zIndex: 100
-        }}>
-            <Link href="/"><span style={linkStyle}>🏠 Home</span></Link>
-            <Link href="/dashboard"><span style={linkStyle}>📊 Dashboard</span></Link>
-            <Link href="/pricing"><span style={linkStyle}>💰 Pricing</span></Link>
-            <Link href="/order"><span style={linkStyle}>📝 Order</span></Link>
-            <Link href="/approved"><span style={linkStyle}>✅ Approved</span></Link>
-            <Link href="/proofs"><span style={linkStyle}>📂 Proofs</span></Link>
-        </div>
-    );
-}
-
-const linkStyle = {
-    color: '#38bdf8',
+const button = {
+    padding: '10px 20px',
+    backgroundColor: '#38bdf8',
+    color: '#0f172a',
     fontWeight: 'bold',
-    cursor: 'pointer'
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    marginTop: '10px'
 };
