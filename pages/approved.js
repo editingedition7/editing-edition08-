@@ -1,37 +1,18 @@
 import Link from "next/link";
 
 export default function Approved() {
-    const names = ["Rohit Sharma", "Priya Singh", "Manish Gupta", "Neha Jain", "Sahil Khan", "Amit Verma", "Divya Sharma", "Ankit Tiwari", "Sneha Roy", "Vikas Dubey"];
-    const services = [
-        { name: "Short Reels Editing (Premium)", price: "₹2700" },
-        { name: "Short Reels Editing (Free)", price: "₹3000" },
-        { name: "Gaming Montage (Premium)", price: "₹4500" },
-        { name: "Gaming Montage (Free)", price: "₹5000" },
-        { name: "Trading Video 10+ Min (Premium)", price: "₹3500" },
-        { name: "Trading Video 10+ Min (Free)", price: "₹4000" },
-        { name: "Trading Video 30+ Min (Premium)", price: "₹5000" },
-        { name: "Trading Video 30+ Min (Free)", price: "₹6000" },
-        { name: "Vlog Editing (Premium)", price: "₹4500" },
-        { name: "Podcast Editing (Premium)", price: "₹4000" },
-        { name: "Thumbnail Designing", price: "₹399" },
+    const orders = [
+        { name: "Rohit Sharma", service: "Short Reels Editing", payment: "Online Payment", price: 3000, time: "Just Now" },
+        { name: "Priya Singh", service: "Gaming Montage", payment: "Order On Delivery", price: 4500, time: "5 min ago" },
+        { name: "Amit Verma", service: "Vlog Editing", payment: "UPI Payment", price: 5000, time: "10 min ago" },
+        { name: "Neha Jain", service: "Podcast Editing", payment: "Online Payment", price: 5500, time: "15 min ago" },
+        { name: "Manish Gupta", service: "Documentary", payment: "Bank Transfer", price: 7000, time: "20 min ago" },
+        { name: "Sahil Khan", service: "Trading Video 10+ min", payment: "Order On Delivery", price: 4500, time: "25 min ago" },
+        { name: "Divya Sharma", service: "Trading Video 30+ min", payment: "Online Payment", price: 6000, time: "30 min ago" },
+        { name: "Ravi Mehta", service: "Monthly 60 Reels", payment: "Online Payment", price: 55000, time: "1 hour ago" },
+        { name: "Sunita Yadav", service: "Monthly 30 Reels", payment: "Bank Transfer", price: 30000, time: "2 hour ago" },
+        { name: "Rakesh Patel", service: "Monthly Trading Reels", payment: "Online Payment", price: 18000, time: "3 hour ago" },
     ];
-
-    const payments = ["UPI Payment", "COD", "Online Payment"];
-    const times = ["Just now", "1 min ago", "3 min ago", "5 min ago", "10 min ago", "15 min ago", "20 min ago"];
-
-    const getRandomItem = (list) => list[Math.floor(Math.random() * list.length)];
-
-    const randomOrders = Array.from({ length: 7 }, (_, i) => {
-        const service = getRandomItem(services);
-        return {
-            id: "#" + Math.random().toString(36).substring(2, 8).toUpperCase(),
-            name: getRandomItem(names),
-            service: service.name,
-            amount: service.price,
-            payment: getRandomItem(payments),
-            time: getRandomItem(times)
-        };
-    });
 
     return (
         <div style={{
@@ -41,60 +22,61 @@ export default function Approved() {
             padding: '40px',
             textAlign: 'center'
         }}>
-            <h1 style={{ color: '#38bdf8' }}>✅ 3000+ Orders Successfully Delivered</h1>
-            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Live Order Approvals with Payment Updates (Pricing Based)</p>
+            <h1 style={{ color: '#38bdf8' }}>✅ 3000+ Orders Approved</h1>
+            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Real Pricing Based on Services | Live Updates</p>
 
-            <table style={{ width: '90%', margin: '0 auto', borderCollapse: 'collapse', color: '#cbd5e1' }}>
-                <thead>
-                    <tr style={{ borderBottom: '2px solid #334155', color: '#38bdf8' }}>
-                        <th style={cell}>Order ID</th>
-                        <th style={cell}>Client</th>
-                        <th style={cell}>Service</th>
-                        <th style={cell}>Payment</th>
-                        <th style={cell}>Amount</th>
-                        <th style={cell}>Status</th>
-                        <th style={cell}>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {randomOrders.map((order) => (
-                        <tr key={order.id} style={{ borderBottom: '1px solid #334155' }}>
-                            <td style={cell}>{order.id}</td>
-                            <td style={cell}>{order.name}</td>
-                            <td style={cell}>{order.service}</td>
-                            <td style={cell}>{order.payment}</td>
-                            <td style={{ ...cell, color: '#facc15' }}>{order.amount}</td>
-                            <td style={{ ...cell, color: '#22c55e', fontWeight: 'bold' }}>Approved</td>
-                            <td style={cell}>{order.time}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <p style={{ color: '#facc15', marginTop: '30px', fontWeight: 'bold' }}>Our Team works 24x7 to deliver fast results 🚀</p>
-
-            <div style={{ marginTop: '40px' }}>
-                <Link href="/"><button style={button}>🏠 Home</button></Link>
-                <Link href="/dashboard"><button style={button}>📊 Dashboard</button></Link>
-                <Link href="/proofs"><button style={button}>📂 Proofs</button></Link>
-                <Link href="/pricing"><button style={button}>💰 Pricing</button></Link>
+            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+                {orders.map((order, index) => (
+                    <div key={index} style={{
+                        background: '#1e293b',
+                        padding: '15px',
+                        borderRadius: '10px',
+                        marginBottom: '15px',
+                        textAlign: 'left'
+                    }}>
+                        <p><b>Client:</b> {order.name}</p>
+                        <p><b>Service:</b> {order.service}</p>
+                        <p><b>Payment Method:</b> {order.payment}</p>
+                        <p><b>Paid:</b> ₹{order.price}</p>
+                        <p><b>Status:</b> <span style={{ color: '#22c55e' }}>Approved</span> ({order.time})</p>
+                    </div>
+                ))}
             </div>
+
+            <div style={{ color: '#facc15', marginTop: '20px' }}>
+                🚀 Editing Edition 7 | Fast Delivery | Secure Payment
+            </div>
+
+            <BottomNav />
         </div>
     );
 }
 
-const cell = {
-    padding: '12px',
-    textAlign: 'center',
-};
+function BottomNav() {
+    return (
+        <div style={{
+            position: 'fixed',
+            bottom: 0,
+            width: '100%',
+            backgroundColor: '#0f172a',
+            display: 'flex',
+            justifyContent: 'space-around',
+            padding: '15px 0',
+            borderTop: '1px solid #334155',
+            zIndex: 100
+        }}>
+            <Link href="/"><span style={linkStyle}>🏠 Home</span></Link>
+            <Link href="/dashboard"><span style={linkStyle}>📊 Dashboard</span></Link>
+            <Link href="/pricing"><span style={linkStyle}>💰 Pricing</span></Link>
+            <Link href="/order"><span style={linkStyle}>📝 Order</span></Link>
+            <Link href="/approved"><span style={linkStyle}>✅ Approved</span></Link>
+            <Link href="/proofs"><span style={linkStyle}>📂 Proofs</span></Link>
+        </div>
+    );
+}
 
-const button = {
-    padding: '10px 20px',
-    backgroundColor: '#38bdf8',
-    color: '#0f172a',
+const linkStyle = {
+    color: '#38bdf8',
     fontWeight: 'bold',
-    border: 'none',
-    borderRadius: '8px',
-    cursor: 'pointer',
-    margin: '10px'
+    cursor: 'pointer'
 };
