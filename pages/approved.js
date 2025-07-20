@@ -2,19 +2,36 @@ import Link from "next/link";
 
 export default function Approved() {
     const names = ["Rohit Sharma", "Priya Singh", "Manish Gupta", "Neha Jain", "Sahil Khan", "Amit Verma", "Divya Sharma", "Ankit Tiwari", "Sneha Roy", "Vikas Dubey"];
-    const services = ["Reels Editing", "Trading Video Editing", "YouTube Vlog Editing", "Thumbnail Designing", "Podcast Editing", "Gaming Montage", "Documentary Editing"];
+    const services = [
+        { name: "Short Reels Editing (Premium)", price: "₹2700" },
+        { name: "Short Reels Editing (Free)", price: "₹3000" },
+        { name: "Gaming Montage (Premium)", price: "₹4500" },
+        { name: "Gaming Montage (Free)", price: "₹5000" },
+        { name: "Trading Video 10+ Min (Premium)", price: "₹3500" },
+        { name: "Trading Video 10+ Min (Free)", price: "₹4000" },
+        { name: "Trading Video 30+ Min (Premium)", price: "₹5000" },
+        { name: "Trading Video 30+ Min (Free)", price: "₹6000" },
+        { name: "Vlog Editing (Premium)", price: "₹4500" },
+        { name: "Podcast Editing (Premium)", price: "₹4000" },
+        { name: "Thumbnail Designing", price: "₹399" },
+    ];
+
     const payments = ["UPI Payment", "COD", "Online Payment"];
-    const times = ["Just now", "1 min ago", "3 min ago", "5 min ago", "10 min ago", "12 min ago", "15 min ago", "20 min ago"];
+    const times = ["Just now", "1 min ago", "3 min ago", "5 min ago", "10 min ago", "15 min ago", "20 min ago"];
 
     const getRandomItem = (list) => list[Math.floor(Math.random() * list.length)];
 
-    const randomOrders = Array.from({ length: 7 }, (_, i) => ({
-        id: "#" + Math.random().toString(36).substring(2, 8).toUpperCase(),
-        name: getRandomItem(names),
-        service: getRandomItem(services),
-        payment: getRandomItem(payments),
-        time: getRandomItem(times)
-    }));
+    const randomOrders = Array.from({ length: 7 }, (_, i) => {
+        const service = getRandomItem(services);
+        return {
+            id: "#" + Math.random().toString(36).substring(2, 8).toUpperCase(),
+            name: getRandomItem(names),
+            service: service.name,
+            amount: service.price,
+            payment: getRandomItem(payments),
+            time: getRandomItem(times)
+        };
+    });
 
     return (
         <div style={{
@@ -25,7 +42,7 @@ export default function Approved() {
             textAlign: 'center'
         }}>
             <h1 style={{ color: '#38bdf8' }}>✅ 3000+ Orders Successfully Delivered</h1>
-            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Live Approval Updates | Trusted by 3000+ Clients</p>
+            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Live Order Approvals with Payment Updates (Pricing Based)</p>
 
             <table style={{ width: '90%', margin: '0 auto', borderCollapse: 'collapse', color: '#cbd5e1' }}>
                 <thead>
@@ -34,6 +51,7 @@ export default function Approved() {
                         <th style={cell}>Client</th>
                         <th style={cell}>Service</th>
                         <th style={cell}>Payment</th>
+                        <th style={cell}>Amount</th>
                         <th style={cell}>Status</th>
                         <th style={cell}>Time</th>
                     </tr>
@@ -45,6 +63,7 @@ export default function Approved() {
                             <td style={cell}>{order.name}</td>
                             <td style={cell}>{order.service}</td>
                             <td style={cell}>{order.payment}</td>
+                            <td style={{ ...cell, color: '#facc15' }}>{order.amount}</td>
                             <td style={{ ...cell, color: '#22c55e', fontWeight: 'bold' }}>Approved</td>
                             <td style={cell}>{order.time}</td>
                         </tr>
