@@ -1,15 +1,20 @@
 import Link from "next/link";
 
 export default function Approved() {
-    const approvedOrders = [
-        { id: 1, name: "Rohit Sharma", service: "YouTube Vlog Editing", payment: "Online Payment", time: "Just Now" },
-        { id: 2, name: "Priya Singh", service: "Reels Editing", payment: "Order On Delivery", time: "5 min ago" },
-        { id: 3, name: "Amit Verma", service: "Podcast Editing", payment: "Online Payment", time: "10 min ago" },
-        { id: 4, name: "Neha Jain", service: "Trading Video Editing", payment: "Order On Delivery", time: "15 min ago" },
-        { id: 5, name: "Manish Gupta", service: "Thumbnail Designing", payment: "Online Payment", time: "20 min ago" },
-        { id: 6, name: "Sahil Khan", service: "Gaming Montage", payment: "Order On Delivery", time: "25 min ago" },
-        { id: 7, name: "Divya Sharma", service: "Documentary Editing", payment: "Online Payment", time: "30 min ago" },
-    ];
+    const names = ["Rohit Sharma", "Priya Singh", "Manish Gupta", "Neha Jain", "Sahil Khan", "Amit Verma", "Divya Sharma", "Ankit Tiwari", "Sneha Roy", "Vikas Dubey"];
+    const services = ["Reels Editing", "Trading Video Editing", "YouTube Vlog Editing", "Thumbnail Designing", "Podcast Editing", "Gaming Montage", "Documentary Editing"];
+    const payments = ["UPI Payment", "COD", "Online Payment"];
+    const times = ["Just now", "1 min ago", "3 min ago", "5 min ago", "10 min ago", "12 min ago", "15 min ago", "20 min ago"];
+
+    const getRandomItem = (list) => list[Math.floor(Math.random() * list.length)];
+
+    const randomOrders = Array.from({ length: 7 }, (_, i) => ({
+        id: "#" + Math.random().toString(36).substring(2, 8).toUpperCase(),
+        name: getRandomItem(names),
+        service: getRandomItem(services),
+        payment: getRandomItem(payments),
+        time: getRandomItem(times)
+    }));
 
     return (
         <div style={{
@@ -19,55 +24,58 @@ export default function Approved() {
             padding: '40px',
             textAlign: 'center'
         }}>
-            <h1 style={{ color: '#38bdf8' }}>✅ Order Approval Updates</h1>
-            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Live Order Approved List (Auto Every 5 Minutes)</p>
+            <h1 style={{ color: '#38bdf8' }}>✅ 3000+ Orders Successfully Delivered</h1>
+            <p style={{ color: '#94a3b8', marginBottom: '20px' }}>Live Approval Updates | Trusted by 3000+ Clients</p>
 
-            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-                {approvedOrders.map((order) => (
-                    <div key={order.id} style={{
-                        background: '#1e293b',
-                        padding: '15px',
-                        borderRadius: '10px',
-                        marginBottom: '15px',
-                        textAlign: 'left'
-                    }}>
-                        <p><b>Client:</b> {order.name}</p>
-                        <p><b>Service:</b> {order.service}</p>
-                        <p><b>Payment Method:</b> {order.payment}</p>
-                        <p><b>Status:</b> <span style={{ color: '#22c55e' }}>Approved</span> ({order.time})</p>
-                    </div>
-                ))}
+            <table style={{ width: '90%', margin: '0 auto', borderCollapse: 'collapse', color: '#cbd5e1' }}>
+                <thead>
+                    <tr style={{ borderBottom: '2px solid #334155', color: '#38bdf8' }}>
+                        <th style={cell}>Order ID</th>
+                        <th style={cell}>Client</th>
+                        <th style={cell}>Service</th>
+                        <th style={cell}>Payment</th>
+                        <th style={cell}>Status</th>
+                        <th style={cell}>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {randomOrders.map((order) => (
+                        <tr key={order.id} style={{ borderBottom: '1px solid #334155' }}>
+                            <td style={cell}>{order.id}</td>
+                            <td style={cell}>{order.name}</td>
+                            <td style={cell}>{order.service}</td>
+                            <td style={cell}>{order.payment}</td>
+                            <td style={{ ...cell, color: '#22c55e', fontWeight: 'bold' }}>Approved</td>
+                            <td style={cell}>{order.time}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            <p style={{ color: '#facc15', marginTop: '30px', fontWeight: 'bold' }}>Our Team works 24x7 to deliver fast results 🚀</p>
+
+            <div style={{ marginTop: '40px' }}>
+                <Link href="/"><button style={button}>🏠 Home</button></Link>
+                <Link href="/dashboard"><button style={button}>📊 Dashboard</button></Link>
+                <Link href="/proofs"><button style={button}>📂 Proofs</button></Link>
+                <Link href="/pricing"><button style={button}>💰 Pricing</button></Link>
             </div>
-
-            <BottomNav />
         </div>
     );
 }
 
-function BottomNav() {
-    return (
-        <div style={{
-            position: 'fixed',
-            bottom: 0,
-            width: '100%',
-            backgroundColor: '#0f172a',
-            display: 'flex',
-            justifyContent: 'space-around',
-            padding: '15px 0',
-            borderTop: '1px solid #334155',
-            zIndex: 100
-        }}>
-            <Link href="/"><span style={linkStyle}>🏠 Home</span></Link>
-            <Link href="/dashboard"><span style={linkStyle}>📊 Dashboard</span></Link>
-            <Link href="/order"><span style={linkStyle}>📝 Order</span></Link>
-            <Link href="/approved"><span style={linkStyle}>✅ Approved</span></Link>
-            <Link href="/proofs"><span style={linkStyle}>📂 Proofs</span></Link>
-        </div>
-    );
-}
+const cell = {
+    padding: '12px',
+    textAlign: 'center',
+};
 
-const linkStyle = {
-    color: '#38bdf8',
+const button = {
+    padding: '10px 20px',
+    backgroundColor: '#38bdf8',
+    color: '#0f172a',
     fontWeight: 'bold',
-    cursor: 'pointer'
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    margin: '10px'
 };
